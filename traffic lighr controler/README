@@ -1,0 +1,138 @@
+# Traffic Light Controller using Verilog
+
+## Introduction
+
+A Traffic Light Controller is a digital system used to control traffic signals in a predefined sequence.
+
+This project implements a simple traffic light controller using Verilog HDL and a Finite State Machine (FSM).
+
+The traffic light operates in three states:
+
+1. RED
+2. GREEN
+3. YELLOW
+
+The sequence continuously repeats:
+
+**RED → GREEN → YELLOW → RED**
+
+## Features
+
+* Designed using Verilog HDL
+* Finite State Machine based design
+* Synchronous state transitions
+* Asynchronous reset
+* Three traffic light outputs
+* Verilog testbench for simulation
+
+## Inputs
+
+| Input   | Description                  |
+| ------- | ---------------------------- |
+| `clk`   | Clock signal                 |
+| `reset` | Resets the controller to RED |
+
+## Outputs
+
+| Output   | Description          |
+| -------- | -------------------- |
+| `red`    | Red traffic light    |
+| `yellow` | Yellow traffic light |
+| `green`  | Green traffic light  |
+
+## State Table
+
+| State  | Red | Yellow | Green |
+| ------ | --: | -----: | ----: |
+| RED    |   1 |      0 |     0 |
+| GREEN  |   0 |      0 |     1 |
+| YELLOW |   0 |      1 |     0 |
+
+## State Transition
+
+```text
+        ┌─────────┐
+        │   RED   │
+        └────┬────┘
+             │
+             ▼
+        ┌─────────┐
+        │  GREEN  │
+        └────┬────┘
+             │
+             ▼
+        ┌─────────┐
+        │ YELLOW  │
+        └────┬────┘
+             │
+             ▼
+           RED
+```
+
+## Timing
+
+For simulation, the following timing values are used:
+
+* RED = 5 clock cycles
+* GREEN = 5 clock cycles
+* YELLOW = 2 clock cycles
+
+These values can be changed using Verilog parameters.
+
+## Files
+
+```text
+traffic-light-controller/
+│
+├── README.md
+├── traffic_light_controller.v
+├── traffic_light_controller_tb.v
+└── simulation_output.txt
+```
+
+### `traffic_light_controller.v`
+
+Contains the main Verilog implementation of the traffic light controller.
+
+### `traffic_light_controller_tb.v`
+
+Contains the testbench used to verify the controller.
+
+### `simulation_output.txt`
+
+Contains the expected simulation results.
+
+## Expected Simulation
+
+The traffic light follows this sequence:
+
+```text
+RED → GREEN → YELLOW → RED → GREEN → YELLOW
+```
+
+Example output:
+
+```text
+Time    Reset   Red   Yellow   Green
+---------------------------------------
+0       1       1     0        0
+10      0       1     0        0
+60      0       0     0        1
+110     0       0     1        0
+130     0       1     0        0
+```
+
+## Conclusion
+
+The Traffic Light Controller was successfully designed using Verilog HDL.
+
+The design uses a Finite State Machine to control the RED, GREEN, and YELLOW lights. The testbench verifies that the controller changes states in the correct sequence.
+
+This project demonstrates the use of:
+
+* Verilog HDL
+* Finite State Machines
+* Sequential logic
+* Clocked circuits
+* Reset logic
+* Testbench-based simulation
